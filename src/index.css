@@ -1,0 +1,54 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+  --muted: #666666;
+  --border: #e0e0e0;
+  --tag-bg: #f2f2f2;
+  --tag-fg: #333333;
+  --accent: #5c6bc0;
+  --link: #5c6bc0;
+  --link-hover: #111111;
+
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--fg);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f0f;
+    --fg: #e8e8e8;
+    --muted: #888888;
+    --border: #2a2a2a;
+    --tag-bg: #1e1e1e;
+    --tag-fg: #cccccc;
+    --accent: #7c8ff0;
+    --link: #7c8ff0;
+    --link-hover: #e8e8e8;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+a:hover {
+  color: var(--link-hover);
+  text-decoration: underline;
+}
