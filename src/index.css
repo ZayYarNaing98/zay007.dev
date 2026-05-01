@@ -2,44 +2,52 @@
   box-sizing: border-box;
 }
 
-:root {
-  --bg: #ffffff;
-  --fg: #111111;
-  --muted: #666666;
-  --border: #e0e0e0;
-  --tag-bg: #f2f2f2;
-  --tag-fg: #333333;
-  --accent: #5c6bc0;
-  --link: #5c6bc0;
-  --link-hover: #111111;
+/* Dark theme (default — terminal background) */
+:root,
+[data-theme="dark"] {
+  --terminal-bg: #1a0025;
+  --bg: rgba(22, 6, 32, 0.82);
+  --fg: #e2d9e8;
+  --muted: #9e8faa;
+  --border: rgba(255, 255, 255, 0.1);
+  --tag-bg: rgba(255, 255, 255, 0.07);
+  --tag-fg: #d4c8de;
+  --accent: #c084fc;
+  --link: #c084fc;
+  --link-hover: #f0e8ff;
+  --toggle-bg: rgba(255, 255, 255, 0.08);
+  --toggle-hover: rgba(255, 255, 255, 0.15);
+}
 
+/* Light theme */
+[data-theme="light"] {
+  --terminal-bg: #f5f0fa;
+  --bg: #f5f0fa;
+  --fg: #1a0025;
+  --muted: #6b5c7a;
+  --border: #ddd0e8;
+  --tag-bg: #ede5f5;
+  --tag-fg: #3d2060;
+  --accent: #7c3aed;
+  --link: #7c3aed;
+  --link-hover: #4c1d95;
+  --toggle-bg: rgba(0, 0, 0, 0.06);
+  --toggle-hover: rgba(0, 0, 0, 0.12);
+}
+
+html {
   font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   font-size: 14px;
   line-height: 1.7;
-  color: var(--fg);
-  background: var(--bg);
   -webkit-font-smoothing: antialiased;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0f0f0f;
-    --fg: #e8e8e8;
-    --muted: #888888;
-    --border: #2a2a2a;
-    --tag-bg: #1e1e1e;
-    --tag-fg: #cccccc;
-    --accent: #7c8ff0;
-    --link: #7c8ff0;
-    --link-hover: #e8e8e8;
-  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  background: var(--terminal-bg);
   color: var(--fg);
+  transition: background 0.3s, color 0.3s;
 }
 
 a {

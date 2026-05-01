@@ -1,4 +1,6 @@
+import { useEffect, useState } from 'react'
 import './App.css'
+import TerminalBg from './TerminalBg'
 
 const data = {
   name: 'ZayYarNaing',
@@ -30,98 +32,96 @@ const data = {
       items: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'CI/CD'],
     },
   ],
-  projects: [
-    {
-      name: 'Project Alpha',
-      desc: 'A full-stack web application for managing tasks and workflows. Built with React on the frontend and Node.js on the backend, deployed on AWS with automated CI/CD pipelines.',
-      tags: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
-      href: '#',
-    },
-    {
-      name: 'Infra Toolkit',
-      desc: 'A collection of Terraform modules and Bash scripts for provisioning cloud infrastructure on AWS and GCP, following best practices for security and scalability.',
-      tags: ['Terraform', 'AWS', 'GCP', 'Bash', 'Docker'],
-      href: '#',
-    },
-    {
-      name: 'API Gateway Service',
-      desc: 'A lightweight reverse proxy and API gateway service built in Go, with support for rate limiting, authentication, and dynamic routing.',
-      tags: ['Go', 'Docker', 'Nginx', 'REST API'],
-      href: '#',
-    },
-  ],
+}
+
+function SunIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="2" x2="12" y2="6"/>
+      <line x1="12" y1="18" x2="12" y2="22"/>
+      <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/>
+      <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+      <line x1="2" y1="12" x2="6" y2="12"/>
+      <line x1="18" y1="12" x2="22" y2="12"/>
+      <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+      <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/>
+    </svg>
+  )
+}
+
+function MoonIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  )
 }
 
 export default function App() {
+  const [dark, setDark] = useState(true)
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
+  }, [dark])
+
   return (
-    <main className="portfolio">
-      {/* About */}
-      <section className="section">
-        <h1 className="about-name">{data.name}</h1>
-        <p className="about-title">{data.title}</p>
-        <p className="about-bio">{data.bio}</p>
-      </section>
+    <>
+      <TerminalBg />
+      <button
+        className="theme-toggle"
+        onClick={() => setDark(d => !d)}
+        aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
+      >
+        {dark ? <SunIcon /> : <MoonIcon />}
+      </button>
+      <main className="portfolio">
+        {/* About */}
+        <section className="section">
+          <h1 className="about-name">{data.name}</h1>
+          <p className="about-title">{data.title}</p>
+          <p className="about-bio">{data.bio}</p>
+        </section>
 
-      {/* Links */}
-      <section className="section">
-        <h2 className="section-heading">Links</h2>
-        <ul className="links-list">
-          {data.links.map((link) => (
-            <li key={link.label}>
-              <span className="link-label">{link.label}</span>
-              <a className="link-value" href={link.href}>
-                {link.display}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Skills */}
-      <section className="section">
-        <h2 className="section-heading">Skills</h2>
-        {data.skills.map((group) => (
-          <div key={group.group} className="skill-group">
-            <p className="skill-group-label">{group.group}</p>
-            <div className="skill-tags">
-              {group.items.map((item) => (
-                <span key={item} className="tag">{item}</span>
-              ))}
-            </div>
-          </div>
-        ))}
-      </section>
-
-      {/* Projects */}
-      <section className="section">
-        <h2 className="section-heading">Projects</h2>
-        <div className="projects-list">
-          {data.projects.map((project) => (
-            <div key={project.name} className="project-card">
-              <div className="project-header">
-                <p className="project-name">{project.name}</p>
-                <a className="project-link" href={project.href} target="_blank" rel="noopener noreferrer">
-                  View →
+        {/* Links */}
+        <section className="section">
+          <h2 className="section-heading">Links</h2>
+          <ul className="links-list">
+            {data.links.map((link) => (
+              <li key={link.label}>
+                <span className="link-label">{link.label}</span>
+                <a className="link-value" href={link.href}>
+                  {link.display}
                 </a>
-              </div>
-              <p className="project-desc">{project.desc}</p>
-              <div className="project-tags">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="tag">{tag}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        {/* Skills */}
+        <section className="section">
+          <h2 className="section-heading">Skills</h2>
+          {data.skills.map((group) => (
+            <div key={group.group} className="skill-group">
+              <p className="skill-group-label">{group.group}</p>
+              <div className="skill-tags">
+                {group.items.map((item) => (
+                  <span key={item} className="tag">{item}</span>
                 ))}
               </div>
             </div>
           ))}
-        </div>
-      </section>
+        </section>
 
-      <footer className="footer">
-        <p>© {new Date().getFullYear()} ZayYarNaing</p>
-        <p>
-          <a href="#" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
-          {' · '}Built with React + TypeScript
-        </p>
-      </footer>
-    </main>
+        <footer className="footer">
+          <p>© {new Date().getFullYear()} ZayYarNaing</p>
+          <p>
+            <a href="#" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
+            {' · '}Built with{' '}
+            <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer">Claude Code</a>
+          </p>
+        </footer>
+      </main>
+    </>
   )
 }

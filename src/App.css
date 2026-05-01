@@ -1,7 +1,95 @@
+/* Theme toggle button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--toggle-bg);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.theme-toggle:hover {
+  background: var(--toggle-hover);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Terminal background */
+.terminal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  padding: 24px 32px;
+}
+
+.terminal-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.terminal-line {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.6s ease;
+}
+
+.t-prompt {
+  color: #22d3ee;
+}
+
+.t-cmd {
+  color: #e2d9e8;
+}
+
+.t-cursor {
+  color: #22d3ee;
+  animation: blink 1s step-end infinite;
+}
+
+[data-theme="light"] .t-prompt {
+  color: #7c3aed;
+}
+
+[data-theme="light"] .t-cmd {
+  color: #3d2060;
+}
+
+[data-theme="light"] .t-cursor {
+  color: #7c3aed;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Portfolio content — glass card over the terminal */
 .portfolio {
+  position: relative;
+  z-index: 1;
   max-width: 640px;
   margin: 0 auto;
   padding: 60px 24px 100px;
+  backdrop-filter: blur(2px);
 }
 
 /* Section */
@@ -117,11 +205,13 @@
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 20px;
-  transition: border-color 0.15s;
+  background: rgba(255, 255, 255, 0.04);
+  transition: border-color 0.15s, background 0.15s;
 }
 
 .project-card:hover {
   border-color: var(--accent);
+  background: rgba(192, 132, 252, 0.06);
 }
 
 .project-header {
@@ -185,16 +275,98 @@
   padding-top: 0;
 }
 
-@media (max-width: 480px) {
+/* ── Tablet ────────────────────────────────── */
+@media (max-width: 768px) {
   .portfolio {
-    padding: 40px 20px 80px;
+    padding: 48px 20px 80px;
+  }
+
+  .terminal-line {
+    font-size: 11px;
   }
 
   .about-name {
     font-size: 22px;
   }
 
-  .project-header {
+  .about-bio {
+    max-width: 100%;
+  }
+
+  .section {
+    margin-bottom: 36px;
+  }
+}
+
+/* ── Mobile ────────────────────────────────── */
+@media (max-width: 480px) {
+  .theme-toggle {
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+  }
+
+  .portfolio {
+    padding: 40px 16px 72px;
+  }
+
+  .about-name {
+    font-size: 20px;
+  }
+
+  .about-title {
+    font-size: 13px;
+  }
+
+  .about-bio {
+    font-size: 13px;
+  }
+
+  .section {
+    margin-bottom: 28px;
+  }
+
+  /* Stack link label above value on small screens */
+  .links-list li {
     flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .link-label {
+    width: auto;
+    font-size: 11px;
+  }
+
+  .link-value {
+    font-size: 13px;
+  }
+
+  .skill-tags {
+    gap: 6px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+  }
+
+  .footer {
+    margin-top: 40px;
+    font-size: 11px;
+  }
+
+  /* Reduce terminal density on small screens */
+  .terminal-bg {
+    padding: 16px;
+  }
+
+  .terminal-lines {
+    gap: 4px;
+  }
+
+  .terminal-line {
+    font-size: 10px;
   }
 }
