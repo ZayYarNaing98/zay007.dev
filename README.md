@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+# ZayYarNaing — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for **ZayYarNaing**, Software Engineer & Infrastructure Engineer.
 
-Currently, two official plugins are available:
+Live: [zayyarnaing-portfolio.pages.dev](https://zay007.zayarnaing-pp.workers.dev)  
+Source: [github.com/ZayYarNaing98/zay007.dev](https://github.com/ZayYarNaing98/zay007.dev.git)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- **React 19** + **TypeScript**
+- **Vite 8** — build tool & dev server
+- **Cloudflare Pages** — deployment
+- Built with [Claude Code](https://claude.ai/code)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- Animated Linux terminal background (`zayyarnaing@zay007:~$`)
+- Dark / light mode toggle (default: dark)
+- Fully responsive — mobile, tablet, desktop
+- Monospace design with purple accent theme
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Development
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # type-check + build → dist/
+npm run lint       # eslint
+npm run preview    # preview production build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Update Content
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+All portfolio content (name, bio, links, skills) is in the `data` object at the top of `src/App.tsx`. Edit that object — no other files need changing.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Deploy to Cloudflare Pages
+
+```bash
+npm run build
+npx wrangler pages deploy dist --project-name=zay007
 ```
+
+Or connect the GitHub repo in the Cloudflare Pages dashboard for automatic deploys on every push:
+- Build command: `npm run build`
+- Output directory: `dist`
+
+## Custom Domain
+
+Cloudflare Dashboard → Pages → project → **Custom domains** → add your domain.
