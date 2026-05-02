@@ -17,7 +17,7 @@ const data = {
   skills: [
     {
       group: 'Languages',
-      items: ['TypeScript', 'JavaScript', 'Python', 'SQL', 'Bash'],
+      items: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'Bash'],
     },
     {
       group: 'Frontend',
@@ -25,7 +25,7 @@ const data = {
     },
     {
       group: 'Backend',
-      items: ['Node.js', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
+      items: ['Node.js', 'Laravel', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
     },
     {
       group: 'Infrastructure',
