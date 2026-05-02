@@ -36,3 +36,36 @@ Two CSS files, no CSS framework:
 ### TypeScript config
 
 Strict mode is on: `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`. Target is ES2023, bundler module resolution.
+
+## Deployment (Cloudflare Pages)
+
+The site deploys as a static SPA to **Cloudflare Pages** (not Workers). `public/_redirects` is already configured to serve `index.html` for all routes.
+
+### One-time setup
+
+```bash
+npm install -g wrangler
+wrangler login
+```
+
+### Deploy
+
+```bash
+npm run build
+wrangler pages deploy dist --project-name=zayyarnaing-portfolio
+```
+
+The live URL will be `zayyarnaing-portfolio.pages.dev` after the first deploy.
+
+### Custom domain
+
+1. Cloudflare Dashboard → Pages → project → **Custom domains**
+2. Add your domain — Cloudflare sets the DNS record automatically if the domain is managed by Cloudflare, or provides a `CNAME` record to add at your registrar.
+
+### Auto-deploy via GitHub
+
+Connect the repo in Cloudflare Pages dashboard:
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Every push to `main` triggers a redeploy automatically.

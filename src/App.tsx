@@ -9,27 +9,27 @@ const data = {
     From designing and developing web applications to deploying and operating scalable cloud infrastructure,
     I strive to deliver clean, maintainable solutions across the full stack.`,
   links: [
-    { label: 'GitHub', href: '#', display: 'github.com/zayyarnaing' },
-    { label: 'LinkedIn', href: '#', display: 'linkedin.com/in/zayyarnaing' },
-    { label: 'Email', href: '#', display: 'zayarnaing.pp@gmail.com' },
-    { label: 'X / Twitter', href: '#', display: '@zayyarnaing' },
+    { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/zayyarnaing' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
+    { label: 'Email', href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
+    { label: 'X / Twitter', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
   ],
   skills: [
     {
       group: 'Languages',
-      items: ['TypeScript', 'JavaScript', 'Python', 'Go', 'SQL', 'Bash'],
+      items: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'Bash'],
     },
     {
       group: 'Frontend',
-      items: ['React', 'Vue', 'HTML / CSS', 'Tailwind CSS', 'Vite'],
+      items: ['React', 'Next.js', 'HTML / CSS', 'Tailwind CSS', 'Vite'],
     },
     {
       group: 'Backend',
-      items: ['Node.js', 'Express', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
+      items: ['Node.js', 'Laravel', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
     },
     {
       group: 'Infrastructure',
-      items: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'CI/CD'],
+      items: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'CI/CD', 'Monitoring (Prometheus, Grafana, New Relic)'],
     },
   ],
 }
@@ -116,7 +116,7 @@ export default function App() {
         <footer className="footer">
           <p>© {new Date().getFullYear()} ZayYarNaing</p>
           <p>
-            <a href="#" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
+            <a href="https://github.com/ZayYarNaing98/zay007.dev.git" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
             {' · '}Built with{' '}
             <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer">Claude Code</a>
           </p>
