@@ -154,9 +154,12 @@
 }
 
 .link-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 13px;
   color: var(--muted);
-  width: 72px;
+  width: 100px;
   flex-shrink: 0;
 }
 
