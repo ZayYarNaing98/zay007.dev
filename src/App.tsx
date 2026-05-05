@@ -29,7 +29,7 @@ const data = {
     },
     {
       group: 'Infrastructure',
-      items: ['Docker', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'Ansible', 'CI/CD', 'Monitoring (Prometheus, Grafana, New Relic)'],
+      items: ['Docker', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'Ansible', 'CI/CD', 'Monitoring (Grafana, New Relic)'],
     },
   ],
 }
