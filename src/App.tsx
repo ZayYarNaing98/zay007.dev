@@ -17,7 +17,7 @@ const data = {
   skills: [
     {
       group: 'Languages',
-      items: ['TypeScript', 'JavaScript', 'Python', 'PHP', 'SQL', 'Bash'],
+      items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'Bash'],
     },
     {
       group: 'Frontend',
@@ -29,7 +29,7 @@ const data = {
     },
     {
       group: 'Infrastructure',
-      items: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'CI/CD', 'Monitoring (Prometheus, Grafana, New Relic)'],
+      items: ['Docker', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'Ansible', 'CI/CD', 'Monitoring (Prometheus, Grafana, New Relic)'],
     },
   ],
 }
