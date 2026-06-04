@@ -39,4 +39,4 @@ Allow: /
 User-agent: cohere-ai
 Allow: /
 
-Sitemap: https://zay007.dev/sitemap.xml
+Sitemap: https://zay007.zayarnaing-pp.workers.dev/sitemap.xml

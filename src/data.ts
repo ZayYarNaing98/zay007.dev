@@ -27,7 +27,7 @@ export interface PortfolioData {
 export const data: PortfolioData = {
   name: 'ZayYarNaing',
   title: 'Software Engineer / Infrastructure Engineer',
-  url: 'https://zay007.dev',
+  url: 'https://zay007.zayarnaing-pp.workers.dev',
   bio: `I'm a software and infrastructure engineer who enjoys building reliable systems from the ground up.
     From designing and developing web applications to deploying and operating scalable cloud infrastructure,
     I strive to deliver clean, maintainable solutions across the full stack.`,

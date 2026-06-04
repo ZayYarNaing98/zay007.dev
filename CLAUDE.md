@@ -35,7 +35,7 @@ The site is a client SPA, so `npm run build` runs an extra `scripts/postbuild.mj
 - **`dist/llms.txt`** and **`dist/sitemap.xml`** are generated from `data`.
 - **`public/robots.txt`** (static) explicitly allows AI crawlers and points to the sitemap.
 
-The canonical domain is hardcoded as `data.url` (`https://zay007.dev`) in `src/data.ts`; meta/OG/canonical tags in `index.html` use the same domain. Change both if the domain changes.
+The canonical domain is hardcoded as `data.url` (`https://zay007.zayarnaing-pp.workers.dev`) in `src/data.ts`; meta/OG/canonical tags in `index.html` use the same domain. Change both if the domain changes.
 
 ### Styling
 
