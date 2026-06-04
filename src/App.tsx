@@ -1,37 +1,13 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import TerminalBg from './TerminalBg'
+import { data } from './data'
 
-const data = {
-  name: 'ZayYarNaing',
-  title: 'Software Engineer / Infrastructure Engineer',
-  bio: `I'm a software and infrastructure engineer who enjoys building reliable systems from the ground up.
-    From designing and developing web applications to deploying and operating scalable cloud infrastructure,
-    I strive to deliver clean, maintainable solutions across the full stack.`,
-  links: [
-    { label: 'GitHub', icon: GitHubIcon, href: 'https://github.com/ZayYarNaing98', display: 'github.com/zayyarnaing' },
-    { label: 'LinkedIn', icon: LinkedInIcon, href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
-    { label: 'Email', icon: EmailIcon, href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
-    { label: 'X', icon: XIcon, href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
-  ],
-  skills: [
-    {
-      group: 'Languages',
-      items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'Bash'],
-    },
-    {
-      group: 'Frontend',
-      items: ['React', 'Next.js', 'HTML / CSS', 'Tailwind CSS', 'Vite'],
-    },
-    {
-      group: 'Backend',
-      items: ['Node.js', 'Laravel', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
-    },
-    {
-      group: 'Infrastructure',
-      items: ['Docker', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'Ansible', 'CI/CD', 'Monitoring (Grafana, New Relic)'],
-    },
-  ],
+const iconMap: Record<string, () => React.ReactElement> = {
+  GitHub: GitHubIcon,
+  LinkedIn: LinkedInIcon,
+  Email: EmailIcon,
+  X: XIcon,
 }
 
 function GitHubIcon() {
@@ -120,17 +96,20 @@ export default function App() {
         <section className="section">
           <h2 className="section-heading">Links</h2>
           <ul className="links-list">
-            {data.links.map((link) => (
+            {data.links.map((link) => {
+              const Icon = iconMap[link.label]
+              return (
               <li key={link.label}>
                 <span className="link-label">
-                  <link.icon />
+                  {Icon && <Icon />}
                   {link.label}
                 </span>
                 <a className="link-value" href={link.href}>
                   {link.display}
                 </a>
               </li>
-            ))}
+              )
+            })}
           </ul>
         </section>
 

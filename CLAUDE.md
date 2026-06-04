@@ -24,7 +24,18 @@ Single-page portfolio built with React 19 + TypeScript, bundled by Vite 8. No ro
 
 ### Content
 
-All portfolio data (name, title, bio, links, skills, projects) lives in the `data` object at the top of `src/App.tsx`. To update content, edit that object — no other files need to change.
+All portfolio content (name, title, url, bio, links, skills) lives in the `data` object in `src/data.ts` — the single source of truth. `src/App.tsx` renders it, and the build (`scripts/postbuild.mjs`) generates the agent-native files from it. To update content, edit `src/data.ts` only. Link icons are mapped by `link.label` via `iconMap` in `App.tsx`.
+
+### Agent-native build (isitagentready.com)
+
+The site is a client SPA, so `npm run build` runs an extra `scripts/postbuild.mjs` step that makes it readable to AI agents and no-JS crawlers:
+
+- **Pre-render**: SSR-builds `src/entry-server.tsx` and injects the real HTML into `dist/index.html` at the `<!--ssr-outlet-->` marker. `src/main.tsx` then `hydrateRoot`s that markup (and falls back to `createRoot` in dev, where the root is empty).
+- **JSON-LD** `Person` is generated from `data` and injected at the `<!--ssr-head-->` marker.
+- **`dist/llms.txt`** and **`dist/sitemap.xml`** are generated from `data`.
+- **`public/robots.txt`** (static) explicitly allows AI crawlers and points to the sitemap.
+
+The canonical domain is hardcoded as `data.url` (`https://zay007.dev`) in `src/data.ts`; meta/OG/canonical tags in `index.html` use the same domain. Change both if the domain changes.
 
 ### Styling
 

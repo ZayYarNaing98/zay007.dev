@@ -1,10 +1,19 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { createRoot, hydrateRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.tsx'
 
-createRoot(document.getElementById('root')!).render(
+const root = document.getElementById('root')!
+const app = (
   <StrictMode>
     <App />
-  </StrictMode>,
+  </StrictMode>
 )
+
+// Production builds are pre-rendered (scripts/postbuild.mjs), so the root
+// already contains markup we hydrate. In dev the root is empty, so we mount.
+if (root.hasChildNodes()) {
+  hydrateRoot(root, app)
+} else {
+  createRoot(root).render(app)
+}
