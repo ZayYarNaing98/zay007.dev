@@ -25,7 +25,7 @@ export interface PortfolioData {
 }
 
 export const data: PortfolioData = {
-  name: 'ZayYarNaing007',
+  name: 'ZayYarNaing',
   title: 'Software Engineer / Infrastructure Engineer',
   url: 'https://zay007.zayarnaing-pp.workers.dev',
   bio: `I'm a software and infrastructure engineer who enjoys building reliable systems from the ground up.
