@@ -49,7 +49,7 @@ export const data: PortfolioData = {
     {
       role: 'Senior Software Engineer',
       company: 'AcePlusSolutions Company Limited',
-      period: '2023 – Present · Yangon, Myanmar',
+      period: 'Jun 2023 – Present · Yangon, Myanmar',
       highlights: [
         'Built RESTful APIs for web and mobile applications, and deployed and maintained modern web apps.',
         'Built a CI/CD pipeline with Ansible for containerized APIs using blue/green environments for zero-downtime deployments.',
@@ -79,7 +79,7 @@ export const data: PortfolioData = {
     {
       role: 'Software Engineer (Remote)',
       company: 'Leaptechnology',
-      period: 'Dec 2024 – 2026 · Singapore',
+      period: 'Dec 2024 – Sep 2026 · Singapore',
       highlights: [
         'Developed an integrated management software system for interior design companies.',
         'Built RESTful APIs using Laravel with a Domain-Driven Design (DDD) architecture.',
