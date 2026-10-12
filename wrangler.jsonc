@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "zay007",
+  "name": "zay007-dev",
   "compatibility_date": "2026-05-01",
   "observability": {
     "enabled": true

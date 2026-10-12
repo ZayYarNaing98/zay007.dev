@@ -14,6 +14,13 @@ export interface SkillGroup {
   items: string[]
 }
 
+export interface Experience {
+  role: string
+  company: string
+  period: string
+  highlights: string[]
+}
+
 export interface PortfolioData {
   name: string
   title: string
@@ -21,38 +28,90 @@ export interface PortfolioData {
   url: string
   bio: string
   links: Link[]
+  experience: Experience[]
   skills: SkillGroup[]
 }
 
 export const data: PortfolioData = {
   name: 'ZayYarNaing',
   title: 'Software Engineer / Infrastructure Engineer',
-  url: 'https://zay007.zayarnaing-pp.workers.dev',
-  bio: `I'm a software and infrastructure engineer who enjoys building reliable systems from the ground up.
-    From designing and developing web applications to deploying and operating scalable cloud infrastructure,
-    I strive to deliver clean, maintainable solutions across the full stack.`,
+  url: 'https://zay007-dev.zayarnaing-pp.workers.dev',
+  bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
+    I build reliable systems end to end, from designing web applications and RESTful APIs to automating
+    infrastructure as code, running zero-downtime CI/CD pipelines, and operating scalable, well-monitored cloud platforms.`,
   links: [
     { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/zayyarnaing' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
     { label: 'Email', href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
     { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
   ],
+  experience: [
+    {
+      role: 'Senior Software Engineer',
+      company: 'AcePlusSolutions Company Limited',
+      period: '2023 – Present · Yangon, Myanmar',
+      highlights: [
+        'Built RESTful APIs for web and mobile applications, and deployed and maintained modern web apps.',
+        'Built a CI/CD pipeline with Ansible for containerized APIs using blue/green environments for zero-downtime deployments.',
+        'Used Docker and Linux for containerization and efficient application deployment in an Agile Scrum team.',
+        'Developed monitoring and observability solutions with New Relic and Grafana.',
+        'Generated infrastructure diagrams from existing Terraform code, improving visibility and collaboration.',
+        'Identified and remediated critical security vulnerabilities uncovered during penetration testing.',
+        'Made technical decisions, refactored code, and provided code reviews and feedback to team members.',
+        'Mentored junior developers and standardized team coding practices.',
+      ],
+    },
+    {
+      role: 'DevOps Engineer',
+      company: 'Hivelocity (APS outsourced services)',
+      period: 'Aug 2024 – Sep 2025 · Japan',
+      highlights: [
+        'Managed high-traffic fan event platforms on AWS, delivering instant, reliable access during major releases.',
+        'Built a resilient CI/CD pipeline for containerized APIs with blue/green deployments for zero-downtime releases.',
+        'Contributed to migrating microservices and Hivelocloud API servers from EC2 to a containerized architecture, boosting performance and scalability.',
+        'Supported the transition to Aurora Serverless, improving database scalability and data retrieval performance.',
+        'Automated deployment and maintenance workflows with Python, Terraform, and Ansible, and produced infrastructure diagrams from existing Terraform code.',
+        'Integrated Slack ChatOps with AWS ECS APIs for real-time deployment control and monitoring.',
+        'Redefined SLOs with New Relic and set up proactive Slack alerting, improving incident response times.',
+        'Designed load testing benchmarks and defined SLI/SLO metrics for new microservices.',
+      ],
+    },
+    {
+      role: 'Software Engineer (Remote)',
+      company: 'Leaptechnology',
+      period: 'Dec 2024 – 2026 · Singapore',
+      highlights: [
+        'Developed an integrated management software system for interior design companies.',
+        'Built RESTful APIs using Laravel with a Domain-Driven Design (DDD) architecture.',
+        'Resolved critical security vulnerabilities identified during a penetration test.',
+        'Made key technical decisions, performed code refactoring, and reviewed code for team members.',
+      ],
+    },
+  ],
   skills: [
     {
       group: 'Languages',
-      items: ['TypeScript', 'JavaScript', 'PHP', 'SQL', 'Bash'],
+      items: ['TypeScript', 'JavaScript', 'PHP', 'Python', 'SQL', 'Bash'],
     },
     {
       group: 'Frontend',
-      items: ['React', 'Next.js', 'HTML / CSS', 'Tailwind CSS', 'Vite'],
+      items: ['React', 'Next.js', 'HTML / CSS', 'Tailwind CSS', 'Bootstrap', 'Sass', 'jQuery', 'Vite', 'Webpack'],
     },
     {
       group: 'Backend',
-      items: ['Node.js', 'Laravel', 'REST API', 'GraphQL', 'PostgreSQL', 'MySQL'],
+      items: ['Laravel', 'Node.js', 'REST API', 'GraphQL', 'Domain-Driven Design', 'PostgreSQL', 'MySQL'],
     },
     {
       group: 'Infrastructure',
-      items: ['Docker', 'AWS', 'GCP', 'Linux', 'Nginx', 'Terraform', 'Ansible', 'CI/CD', 'Monitoring (Grafana, New Relic)'],
+      items: ['Docker', 'Kubernetes', 'AWS', 'GCP', 'DigitalOcean', 'Linux / Ubuntu', 'Nginx', 'Apache', 'Terraform', 'Ansible'],
+    },
+    {
+      group: 'CI/CD & Observability',
+      items: ['GitHub Actions', 'CircleCI', 'Blue/Green Deployments', 'New Relic', 'Grafana', 'Uptime Kuma', 'SLI / SLO'],
+    },
+    {
+      group: 'Tools',
+      items: ['Git', 'GitLab', 'Jira', 'Blue', 'Agile Scrum'],
     },
   ],
 }

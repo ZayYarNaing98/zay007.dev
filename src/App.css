@@ -167,6 +167,60 @@
   font-size: 13px;
 }
 
+/* Experience */
+.experience-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.experience-item {
+  padding-left: 14px;
+  border-left: 2px solid var(--border);
+}
+
+.experience-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.experience-role {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--fg);
+  margin: 0;
+}
+
+.experience-period {
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.experience-company {
+  font-size: 13px;
+  color: var(--accent);
+  margin: 2px 0 10px;
+}
+
+.experience-highlights {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  color: var(--fg);
+  line-height: 1.7;
+}
+
+.experience-highlights li + li {
+  margin-top: 4px;
+}
+
 /* Skills */
 .skill-group {
   margin-bottom: 20px;
@@ -344,6 +398,16 @@
 
   .link-value {
     font-size: 13px;
+  }
+
+  /* Stack period under role on small screens */
+  .experience-header {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .experience-highlights {
+    font-size: 12px;
   }
 
   .skill-tags {

@@ -56,6 +56,9 @@ const jsonLd = {
     .filter((l) => l.href.startsWith('http'))
     .map((l) => l.href),
   knowsAbout: data.skills.flatMap((g) => g.items),
+  worksFor: data.experience
+    .filter((e) => e.period.includes('Present'))
+    .map((e) => ({ '@type': 'Organization', name: e.company })),
 }
 const jsonLdTag =
   '<script type="application/ld+json">' +
@@ -78,6 +81,12 @@ const llms = [
   '## Links',
   ...data.links.map((l) => `- [${l.label}](${l.href}): ${l.display}`),
   '',
+  '## Experience',
+  ...data.experience.flatMap((e) => [
+    `### ${e.role} — ${e.company} (${e.period})`,
+    ...e.highlights.map((h) => `- ${h}`),
+    '',
+  ]),
   '## Skills',
   ...data.skills.map((g) => `- **${g.group}**: ${g.items.join(', ')}`),
   '',

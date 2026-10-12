@@ -2,7 +2,7 @@
 
 Personal portfolio site for **ZayYarNaing**, Software Engineer & Infrastructure Engineer.
 
-Live: [zayyarnaing-portfolio.pages.dev](https://zay007.zayarnaing-pp.workers.dev)  
+Live: [zay007-dev.zayarnaing-pp.workers.dev](https://zay007-dev.zayarnaing-pp.workers.dev)  
 Source: [github.com/ZayYarNaing98/zay007.dev](https://github.com/ZayYarNaing98/zay007.dev.git)
 
 ## Stack

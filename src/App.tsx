@@ -113,6 +113,27 @@ export default function App() {
           </ul>
         </section>
 
+        {/* Experience */}
+        <section className="section">
+          <h2 className="section-heading">Experience</h2>
+          <ol className="experience-list">
+            {data.experience.map((job) => (
+              <li key={`${job.company}-${job.role}`} className="experience-item">
+                <div className="experience-header">
+                  <h3 className="experience-role">{job.role}</h3>
+                  <span className="experience-period">{job.period}</span>
+                </div>
+                <p className="experience-company">{job.company}</p>
+                <ul className="experience-highlights">
+                  {job.highlights.map((h) => (
+                    <li key={h}>{h}</li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         {/* Skills */}
         <section className="section">
           <h2 className="section-heading">Skills</h2>
