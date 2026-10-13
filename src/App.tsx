@@ -87,8 +87,19 @@ export default function App() {
       <main className="portfolio">
         {/* About */}
         <section className="section">
-          <h1 className="about-name">{data.name}</h1>
-          <p className="about-title">{data.title}</p>
+          <div className="about-header">
+            <img
+              className="about-avatar"
+              src="/avatar.webp"
+              alt={`Photo of ${data.name}`}
+              width={72}
+              height={90}
+            />
+            <div>
+              <h1 className="about-name">{data.name}</h1>
+              <p className="about-title">{data.title}</p>
+            </div>
+          </div>
           <p className="about-bio">{data.bio}</p>
         </section>
 

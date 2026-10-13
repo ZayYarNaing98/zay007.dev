@@ -115,6 +115,22 @@
 }
 
 /* About */
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.about-avatar {
+  width: 72px;
+  height: 90px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
 .about-name {
   font-size: 26px;
   font-weight: 700;
@@ -126,7 +142,7 @@
 .about-title {
   font-size: 14px;
   color: var(--muted);
-  margin: 0 0 20px;
+  margin: 0;
 }
 
 .about-bio {
