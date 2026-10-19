@@ -18,6 +18,7 @@ export interface Experience {
   role: string
   company: string
   period: string
+  location: string
   highlights: string[]
 }
 
@@ -34,7 +35,7 @@ export interface PortfolioData {
 
 export const data: PortfolioData = {
   name: 'ZayYarNaing',
-  title: 'Software Engineer / Infrastructure Engineer',
+  title: 'Software Engineer / DevOps Engineer',
   url: 'https://zay007-dev.zayarnaing-pp.workers.dev',
   bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
     I build reliable systems end to end, from designing web applications and RESTful APIs to automating
@@ -49,7 +50,8 @@ export const data: PortfolioData = {
     {
       role: 'Senior Software Engineer',
       company: 'AcePlusSolutions Company Limited',
-      period: 'Jun 2023 – Present · Yangon, Myanmar',
+      period: 'Jun 2023 – Present',
+      location: 'Yangon, Myanmar',
       highlights: [
         'Built RESTful APIs for web and mobile applications, and deployed and maintained modern web apps.',
         'Built a CI/CD pipeline with Ansible for containerized APIs using blue/green environments for zero-downtime deployments.',
@@ -64,7 +66,8 @@ export const data: PortfolioData = {
     {
       role: 'DevOps Engineer',
       company: 'Hivelocity (APS outsourced services)',
-      period: 'Aug 2024 – Sep 2025 · Japan',
+      period: 'Aug 2024 – Sep 2025',
+      location: 'Japan',
       highlights: [
         'Managed high-traffic fan event platforms on AWS, delivering instant, reliable access during major releases.',
         'Built a resilient CI/CD pipeline for containerized APIs with blue/green deployments for zero-downtime releases.',
@@ -77,9 +80,10 @@ export const data: PortfolioData = {
       ],
     },
     {
-      role: 'Software Engineer (Remote)',
+      role: 'Software Engineer',
       company: 'Leaptechnology',
-      period: 'Dec 2024 – Sep 2026 · Singapore',
+      period: 'Dec 2024 – Sep 2026',
+      location: 'Singapore (Remote)',
       highlights: [
         'Developed an integrated management software system for interior design companies.',
         'Built RESTful APIs using Laravel with a Domain-Driven Design (DDD) architecture.',

@@ -3,6 +3,17 @@ import './App.css'
 import TerminalBg from './TerminalBg'
 import { data } from './data'
 
+// Highlights beyond this count are tucked into a <details> toggle.
+// They stay in the pre-rendered HTML, so crawlers still see them.
+const HIGHLIGHTS_SHOWN = 4
+
+const TABS = [
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+] as const
+
+type TabId = (typeof TABS)[number]['id']
+
 const iconMap: Record<string, () => React.ReactElement> = {
   GitHub: GitHubIcon,
   LinkedIn: LinkedInIcon,
@@ -69,6 +80,16 @@ function MoonIcon() {
 
 export default function App() {
   const [dark, setDark] = useState(true)
+  const [tab, setTab] = useState<TabId>('experience')
+
+  // Arrow keys move between tabs, per the WAI-ARIA tabs pattern.
+  function onTabKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
+    const i = TABS.findIndex((t) => t.id === tab)
+    const next = TABS[(i + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length]
+    setTab(next.id)
+    document.getElementById(`tab-${next.id}`)?.focus()
+  }
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
@@ -92,8 +113,8 @@ export default function App() {
               className="about-avatar"
               src="/avatar.webp"
               alt={`Photo of ${data.name}`}
-              width={72}
-              height={90}
+              width={112}
+              height={140}
             />
             <div>
               <h1 className="about-name">{data.name}</h1>
@@ -124,40 +145,96 @@ export default function App() {
           </ul>
         </section>
 
-        {/* Experience */}
+        {/* Experience / Skills tabs */}
         <section className="section">
-          <h2 className="section-heading">Experience</h2>
+          <div className="tabs" role="tablist" aria-label="Experience and skills">
+            {TABS.map((t) => (
+              <button
+                key={t.id}
+                id={`tab-${t.id}`}
+                role="tab"
+                type="button"
+                className="tab section-heading"
+                aria-selected={tab === t.id}
+                aria-controls={`panel-${t.id}`}
+                tabIndex={tab === t.id ? 0 : -1}
+                onClick={() => setTab(t.id)}
+                onKeyDown={onTabKeyDown}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+
+          {/* Both panels are always rendered (inactive one is `hidden`)
+              so the pre-rendered HTML still contains all content. */}
+          <div
+            id="panel-experience"
+            role="tabpanel"
+            aria-labelledby="tab-experience"
+            hidden={tab !== 'experience'}
+          >
           <ol className="experience-list">
-            {data.experience.map((job) => (
-              <li key={`${job.company}-${job.role}`} className="experience-item">
+            {data.experience.map((job) => {
+              const current = job.period.includes('Present')
+              const shown = job.highlights.slice(0, HIGHLIGHTS_SHOWN)
+              const more = job.highlights.slice(HIGHLIGHTS_SHOWN)
+              return (
+              <li
+                key={`${job.company}-${job.role}`}
+                className={`experience-item${current ? ' is-current' : ''}`}
+              >
                 <div className="experience-header">
                   <h3 className="experience-role">{job.role}</h3>
-                  <span className="experience-period">{job.period}</span>
+                  <span className="experience-period">
+                    {current && <span className="experience-badge">Current</span>}
+                    {job.period}
+                  </span>
                 </div>
-                <p className="experience-company">{job.company}</p>
+                <p className="experience-meta">
+                  <span className="experience-company">{job.company}</span>
+                  <span className="experience-location">{job.location}</span>
+                </p>
                 <ul className="experience-highlights">
-                  {job.highlights.map((h) => (
+                  {shown.map((h) => (
                     <li key={h}>{h}</li>
                   ))}
                 </ul>
+                {more.length > 0 && (
+                  <details className="experience-more">
+                    <summary>{more.length} more</summary>
+                    <ul className="experience-highlights">
+                      {more.map((h) => (
+                        <li key={h}>{h}</li>
+                      ))}
+                    </ul>
+                  </details>
+                )}
               </li>
-            ))}
+              )
+            })}
           </ol>
-        </section>
+          </div>
 
-        {/* Skills */}
-        <section className="section">
-          <h2 className="section-heading">Skills</h2>
-          {data.skills.map((group) => (
-            <div key={group.group} className="skill-group">
-              <p className="skill-group-label">{group.group}</p>
-              <div className="skill-tags">
-                {group.items.map((item) => (
-                  <span key={item} className="tag">{item}</span>
-                ))}
+          <div
+            id="panel-skills"
+            role="tabpanel"
+            aria-labelledby="tab-skills"
+            hidden={tab !== 'skills'}
+          >
+          <dl className="skills-list">
+            {data.skills.map((group) => (
+              <div key={group.group} className="skill-group">
+                <dt className="skill-group-label">{group.group}</dt>
+                <dd className="skill-tags">
+                  {group.items.map((item) => (
+                    <span key={item} className="tag">{item}</span>
+                  ))}
+                </dd>
               </div>
-            </div>
-          ))}
+            ))}
+          </dl>
+          </div>
         </section>
 
         <footer className="footer">

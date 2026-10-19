@@ -83,7 +83,7 @@ const llms = [
   '',
   '## Experience',
   ...data.experience.flatMap((e) => [
-    `### ${e.role} — ${e.company} (${e.period})`,
+    `### ${e.role} — ${e.company} (${e.period} · ${e.location})`,
     ...e.highlights.map((h) => `- ${h}`),
     '',
   ]),
