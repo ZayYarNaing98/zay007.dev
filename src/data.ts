@@ -36,7 +36,7 @@ export interface PortfolioData {
 export const data: PortfolioData = {
   name: 'ZayYarNaing',
   title: 'Software Engineer / DevOps Engineer',
-  url: 'https://zay007-dev.zayarnaing-pp.workers.dev',
+  url: 'https://zayarnaing.com',
   bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
     I build reliable systems end to end, from designing web applications and RESTful APIs to automating
     infrastructure as code, running zero-downtime CI/CD pipelines, and operating scalable, well-monitored cloud platforms.`,

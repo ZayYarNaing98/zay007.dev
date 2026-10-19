@@ -8,6 +8,10 @@
   "assets": {
     "not_found_handling": "single-page-application"
   },
+  "routes": [
+    { "pattern": "zayarnaing.com", "custom_domain": true },
+    { "pattern": "www.zayarnaing.com", "custom_domain": true }
+  ],
   "compatibility_flags": [
     "nodejs_compat"
   ]
