@@ -19,6 +19,7 @@ const iconMap: Record<string, () => React.ReactElement> = {
   LinkedIn: LinkedInIcon,
   Email: EmailIcon,
   X: XIcon,
+  CV: DownloadIcon,
 }
 
 function GitHubIcon() {
@@ -50,6 +51,16 @@ function XIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.253 5.622 5.91-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+    </svg>
+  )
+}
+
+function DownloadIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
     </svg>
   )
 }
@@ -136,7 +147,11 @@ export default function App() {
                   {Icon && <Icon />}
                   {link.label}
                 </span>
-                <a className="link-value" href={link.href}>
+                <a
+                  className="link-value"
+                  href={link.href}
+                  download={link.download ? 'ZayYarNaing-CV.pdf' : undefined}
+                >
                   {link.display}
                 </a>
               </li>

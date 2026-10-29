@@ -7,6 +7,8 @@ export interface Link {
   label: string
   href: string
   display: string
+  /** Serve as a file download (e.g. the CV PDF) instead of navigating. */
+  download?: boolean
 }
 
 export interface SkillGroup {
@@ -45,6 +47,7 @@ export const data: PortfolioData = {
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
     { label: 'Email', href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
     { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
+    { label: 'CV', href: '/zayarnaing-cv.pdf', display: 'Download CV (PDF)', download: true },
   ],
   experience: [
     {
