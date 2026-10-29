@@ -11,6 +11,11 @@ export interface Link {
   download?: boolean
 }
 
+export interface StackLine {
+  key: string
+  value: string
+}
+
 export interface SkillGroup {
   group: string
   items: string[]
@@ -30,23 +35,39 @@ export interface PortfolioData {
   /** Canonical site URL, no trailing slash. */
   url: string
   bio: string
+  /** Status pill in the hero, e.g. "Open to remote roles". */
+  availability: string
+  /** One-line pitch in the closing contact block. */
+  contactNote: string
+  /** Lines shown in the hero's `cat stack.yml` terminal card. */
+  stack: StackLine[]
   links: Link[]
   experience: Experience[]
   skills: SkillGroup[]
 }
 
 export const data: PortfolioData = {
-  name: 'ZayYarNaing',
+  name: 'Zay Yar Naing',
   title: 'Software Engineer / DevOps Engineer',
   url: 'https://zayarnaing.com',
   bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
     I build reliable systems end to end, from designing web applications and RESTful APIs to automating
     infrastructure as code, running zero-downtime CI/CD pipelines, and operating scalable, well-monitored cloud platforms.`,
+  availability: 'Open to remote roles',
+  contactNote: "I'm open to remote backend / DevOps roles and contract work. I usually reply within a day.",
+  stack: [
+    { key: 'role', value: 'senior-software + devops' },
+    { key: 'apps', value: '[laravel, next.js, react, node]' },
+    { key: 'infra', value: '[docker, kubernetes, terraform, ansible]' },
+    { key: 'cloud', value: '[aws, gcp, digitalocean]' },
+    { key: 'deploys', value: 'blue/green, zero-downtime' },
+    { key: 'observability', value: '[new-relic, grafana, slo]' },
+  ],
   links: [
-    { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/zayyarnaing' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
+    { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/ZayYarNaing98' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zay-yar-naing-b76399255' },
     { label: 'Email', href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
-    { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
+    { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@ZayYarN81868814' },
     { label: 'CV', href: '/zayarnaing-cv.pdf', display: 'Download CV (PDF)', download: true },
   ],
   experience: [

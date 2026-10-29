@@ -2,56 +2,84 @@
   box-sizing: border-box;
 }
 
-/* Dark theme (default — terminal background) */
+/* Dark theme (default) */
 :root,
 [data-theme="dark"] {
-  --terminal-bg: #1a0025;
-  --bg: rgba(22, 6, 32, 0.82);
-  --fg: #e2d9e8;
-  --muted: #9e8faa;
-  --border: rgba(255, 255, 255, 0.1);
-  --tag-bg: rgba(255, 255, 255, 0.07);
-  --tag-fg: #d4c8de;
-  --accent: #c084fc;
-  --link: #c084fc;
-  --link-hover: #f0e8ff;
-  --toggle-bg: rgba(255, 255, 255, 0.08);
-  --toggle-hover: rgba(255, 255, 255, 0.15);
+  --bg: #1a0025;
+  --header-bg: rgba(26, 0, 37, 0.92);
+  --card-bg: #200c2d;
+  --term-bg: #120019;
+  --term-bar: #1f0b2b;
+  --chip-bg: #2e1a3c;
+  --chip-border: #4a2d5c;
+  --fg: #ece4f1;
+  --fg-soft: #e2d6ec;
+  --subtle: #cfc3d8;
+  --muted: #b3a3c0;
+  --border: #3a2148;
+  --border-strong: #5a3a6e;
+  --accent: #c9a6ff;
+  --on-accent: #1a0025;
+  --link: #d4b8ff;
+  --link-hover: #ffffff;
+  /* Green is reserved for status ("open to work", "current") */
+  --ok: #7ee787;
+  --ok-border: #2f5a37;
+  --ok-bg: #13281a;
 }
 
 /* Light theme */
 [data-theme="light"] {
-  --terminal-bg: #f5f0fa;
-  --bg: #f5f0fa;
-  --fg: #1a0025;
-  --muted: #6b5c7a;
-  --border: #ddd0e8;
-  --tag-bg: #ede5f5;
-  --tag-fg: #3d2060;
-  --accent: #7c3aed;
-  --link: #7c3aed;
-  --link-hover: #4c1d95;
-  --toggle-bg: rgba(0, 0, 0, 0.06);
-  --toggle-hover: rgba(0, 0, 0, 0.12);
+  --bg: #faf7fc;
+  --header-bg: rgba(250, 247, 252, 0.92);
+  --card-bg: #ffffff;
+  --term-bg: #f4eef8;
+  --term-bar: #ebe1f2;
+  --chip-bg: #efe6f5;
+  --chip-border: #dccbe8;
+  --fg: #1f1029;
+  --fg-soft: #33233f;
+  --subtle: #4a3a56;
+  --muted: #5f4f6b;
+  --border: #e4d9ec;
+  --border-strong: #c9b6d8;
+  --accent: #6b2fb3;
+  --on-accent: #ffffff;
+  --link: #6b2fb3;
+  --link-hover: #3d1470;
+  --ok: #1a7f37;
+  --ok-border: #a6d8b0;
+  --ok-bg: #e6f6ea;
 }
 
 html {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
-  font-size: 14px;
-  line-height: 1.7;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'Cascadia Code', Menlo, Consolas, monospace;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
   margin: 0;
   padding: 0;
-  background: var(--terminal-bg);
+  background: var(--bg);
   color: var(--fg);
   transition: background 0.3s, color 0.3s;
 }
 
 /* Links are underlined (not just coloured) so they stay recognisable
-   for colour-blind visitors; hover thickens the line as a second cue. */
+   for colour-blind visitors; hover thickens the line as a second cue.
+   Buttons, nav and icon links opt out in App.css — their shape or
+   position already marks them as interactive. */
 a {
   color: var(--link);
   text-decoration: underline;
