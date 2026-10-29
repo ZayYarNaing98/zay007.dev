@@ -370,6 +370,8 @@
 
 .experience-more summary:hover {
   color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .experience-more[open] summary {

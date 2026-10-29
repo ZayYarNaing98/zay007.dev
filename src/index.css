@@ -50,13 +50,26 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+/* Links are underlined (not just coloured) so they stay recognisable
+   for colour-blind visitors; hover thickens the line as a second cue. */
 a {
   color: var(--link);
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
   transition: color 0.15s;
 }
 
 a:hover {
   color: var(--link-hover);
-  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* Visible keyboard focus for every interactive element, in both themes */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
