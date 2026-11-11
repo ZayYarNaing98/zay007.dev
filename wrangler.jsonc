@@ -17,6 +17,8 @@
     { "pattern": "zayarnaing.com", "custom_domain": true },
     { "pattern": "www.zayarnaing.com", "custom_domain": true }
   ],
+  // Page-view counter (views-counter/ Worker), called over RPC from /api/views.
+  "services": [{ "binding": "VIEWS", "service": "views-counter" }],
   "compatibility_flags": [
     "nodejs_compat"
   ]
