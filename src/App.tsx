@@ -189,13 +189,14 @@ export default function App() {
           <ul className="projects-grid">
             {data.projects.map((p) => (
               <li key={p.href}>
-                <a className="project-tile" href={p.href}>
+                <a className="project-tile" href={p.href} target="_blank" rel="noopener noreferrer">
                   <span className="project-tile-head">
                     <span className="project-tile-name">{p.name}</span>
                     <ArrowUpRightIcon />
                   </span>
                   <span className="project-tile-url">{p.href.replace(/^https:\/\//, '')}</span>
                   <span className="project-tile-desc">{p.description}</span>
+                  <span className="visually-hidden"> (opens in a new tab)</span>
                 </a>
               </li>
             ))}
