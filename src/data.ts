@@ -24,6 +24,13 @@ export interface Experience {
   highlights: string[]
 }
 
+/** A "What I build" tile: one phrase from the bio plus its tools. */
+export interface Focus {
+  title: string
+  icon: 'code' | 'iac' | 'pipeline' | 'cloud'
+  tags: string[]
+}
+
 export interface PortfolioData {
   name: string
   title: string
@@ -31,12 +38,15 @@ export interface PortfolioData {
   url: string
   bio: string
   links: Link[]
+  focus: Focus[]
+  /** Tools shown in the strip under the hero. */
+  stack: string[]
   experience: Experience[]
   skills: SkillGroup[]
 }
 
 export const data: PortfolioData = {
-  name: 'ZayYarNaing',
+  name: 'Zay Yar Naing',
   title: 'Software Engineer / DevOps Engineer',
   url: 'https://zayarnaing.com',
   bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
@@ -49,6 +59,13 @@ export const data: PortfolioData = {
     { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
     { label: 'CV', href: '/zayarnaing-cv.pdf', display: 'Download CV (PDF)', download: true },
   ],
+  focus: [
+    { title: 'Web applications & RESTful APIs', icon: 'code', tags: ['Laravel', 'Next.js', 'React', 'Node.js', 'GraphQL'] },
+    { title: 'Infrastructure as code', icon: 'iac', tags: ['Terraform', 'Ansible', 'Docker', 'Kubernetes'] },
+    { title: 'Zero-downtime CI/CD pipelines', icon: 'pipeline', tags: ['GitHub Actions', 'CircleCI', 'Blue/Green Deployments', 'Ansible'] },
+    { title: 'Scalable, well-monitored cloud platforms', icon: 'cloud', tags: ['AWS', 'GCP', 'DigitalOcean', 'New Relic', 'Grafana', 'Uptime Kuma'] },
+  ],
+  stack: ['Laravel', 'Next.js', 'React', 'Docker', 'Kubernetes', 'Terraform', 'Ansible', 'AWS', 'GCP', 'New Relic', 'Grafana'],
   experience: [
     {
       role: 'Senior Software Engineer',
