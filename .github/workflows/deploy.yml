@@ -22,9 +22,9 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build
-
       # The site's VIEWS service binding needs views-counter to exist, so it deploys first.
+      # It also deploys before the site build, which writes .wrangler/deploy/config.json at
+      # the repo root; wrangler would find that file from views-counter/ and refuse to run.
       - name: Install views-counter
         run: npm ci
         working-directory: views-counter
@@ -36,6 +36,8 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: views-counter
           command: deploy
+
+      - run: npm run build
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
