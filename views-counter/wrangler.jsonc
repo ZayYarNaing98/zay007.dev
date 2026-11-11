@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "views-counter",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-05-01",
+  // Not public: only the zay007-dev Worker reaches it, through a service binding.
+  "workers_dev": false,
+  "preview_urls": false,
+  "durable_objects": {
+    "bindings": [{ "name": "VIEW_COUNTER", "class_name": "ViewCounter" }]
+  },
+  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ViewCounter"] }],
+  "observability": { "enabled": true }
+}

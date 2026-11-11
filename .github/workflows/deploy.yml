@@ -24,6 +24,19 @@ jobs:
 
       - run: npm run build
 
+      # The site's VIEWS service binding needs views-counter to exist, so it deploys first.
+      - name: Install views-counter
+        run: npm ci
+        working-directory: views-counter
+
+      - name: Deploy views-counter
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: views-counter
+          command: deploy
+
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
         with:

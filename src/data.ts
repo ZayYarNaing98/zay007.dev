@@ -24,13 +24,28 @@ export interface Experience {
   highlights: string[]
 }
 
+export interface Fact {
+  label: string
+  value: string
+}
+
+export interface Project {
+  name: string
+  href: string
+  description: string
+}
+
 export interface PortfolioData {
   name: string
   title: string
   /** Canonical site URL, no trailing slash. */
   url: string
   bio: string
+  email: string
+  cv: string
+  quickFacts: Fact[]
   links: Link[]
+  projects: Project[]
   experience: Experience[]
   skills: SkillGroup[]
 }
@@ -42,12 +57,23 @@ export const data: PortfolioData = {
   bio: `I'm a senior software engineer with a DevOps focus and a strong full-stack background.
     I build reliable systems end to end, from designing web applications and RESTful APIs to automating
     infrastructure as code, running zero-downtime CI/CD pipelines, and operating scalable, well-monitored cloud platforms.`,
+  email: 'zayarnaing.pp@gmail.com',
+  cv: '/zayarnaing-cv.pdf',
+  quickFacts: [
+    { label: 'Location', value: 'Yangon, Myanmar (UTC+06:30)' },
+    { label: 'Current', value: 'Senior Software Engineer @ AcePlusSolutions' },
+  ],
   links: [
-    { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/zayyarnaing' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zayyarnaing' },
+    { label: 'GitHub', href: 'https://github.com/ZayYarNaing98', display: 'github.com/ZayYarNaing98' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/zay-yar-naing-b76399255', display: 'linkedin.com/in/zay-yar-naing-b76399255' },
     { label: 'Email', href: 'mailto:zayarnaing.pp@gmail.com', display: 'zayarnaing.pp@gmail.com' },
-    { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@zayyarnaing' },
+    { label: 'X', href: 'https://x.com/ZayYarN81868814', display: '@ZayYarN81868814' },
     { label: 'CV', href: '/zayarnaing-cv.pdf', display: 'Download CV (PDF)', download: true },
+  ],
+  projects: [
+    { name: 'Portfolio', href: 'https://zayarnaing.com', description: 'This site — portfolio and CV.' },
+    { name: 'Vim TypeTutor', href: 'https://vim.zayarnaing.com', description: 'Learn Vim in your browser with a real editor.' },
+    { name: 'UNO No Mercy', href: 'https://uno.zayarnaing.com', description: "Real-time multiplayer UNO Show 'Em No Mercy for 2–10 players." },
   ],
   experience: [
     {

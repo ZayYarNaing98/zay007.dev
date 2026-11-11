@@ -1,18 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import TerminalBg from './TerminalBg'
+import ViewCount from './ViewCount'
 import { data } from './data'
 
 // Highlights beyond this count are tucked into a <details> toggle.
 // They stay in the pre-rendered HTML, so crawlers still see them.
 const HIGHLIGHTS_SHOWN = 4
-
-const TABS = [
-  { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
-] as const
-
-type TabId = (typeof TABS)[number]['id']
 
 const iconMap: Record<string, () => React.ReactElement> = {
   GitHub: GitHubIcon,
@@ -65,6 +59,22 @@ function DownloadIcon() {
   )
 }
 
+function ArrowUpRightIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 17 17 7M8 7h9v9"/>
+    </svg>
+  )
+}
+
+function ChevronDownIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="m6 9 6 6 6-6"/>
+    </svg>
+  )
+}
+
 function SunIcon() {
   return (
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -91,16 +101,6 @@ function MoonIcon() {
 
 export default function App() {
   const [dark, setDark] = useState(true)
-  const [tab, setTab] = useState<TabId>('experience')
-
-  // Arrow keys move between tabs, per the WAI-ARIA tabs pattern.
-  function onTabKeyDown(e: React.KeyboardEvent<HTMLButtonElement>) {
-    if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return
-    const i = TABS.findIndex((t) => t.id === tab)
-    const next = TABS[(i + (e.key === 'ArrowRight' ? 1 : TABS.length - 1)) % TABS.length]
-    setTab(next.id)
-    document.getElementById(`tab-${next.id}`)?.focus()
-  }
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
@@ -118,7 +118,7 @@ export default function App() {
       </button>
       <main className="portfolio">
         {/* About */}
-        <section className="section">
+        <section className="section" aria-labelledby="about-name">
           <div className="about-header">
             <img
               className="about-avatar"
@@ -128,16 +128,39 @@ export default function App() {
               height={140}
             />
             <div>
-              <h1 className="about-name">{data.name}</h1>
+              <h1 className="about-name" id="about-name">{data.name}</h1>
               <p className="about-title">{data.title}</p>
             </div>
           </div>
           <p className="about-bio">{data.bio}</p>
+          <div className="cta-row">
+            <a className="btn btn-primary" href={data.cv} download="ZayYarNaing-CV.pdf">
+              <DownloadIcon />
+              Download CV (PDF)
+            </a>
+            <a className="btn btn-outline" href={`mailto:${data.email}`}>
+              <EmailIcon />
+              Email me
+            </a>
+          </div>
+        </section>
+
+        {/* Quick facts */}
+        <section className="section section-compact" aria-labelledby="facts-heading">
+          <h2 className="section-heading" id="facts-heading">Quick facts</h2>
+          <dl className="facts-list">
+            {data.quickFacts.map((f) => (
+              <div key={f.label} className="fact">
+                <dt>{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))}
+          </dl>
         </section>
 
         {/* Links */}
-        <section className="section">
-          <h2 className="section-heading">Links</h2>
+        <section className="section section-compact" aria-labelledby="links-heading">
+          <h2 className="section-heading" id="links-heading">Links</h2>
           <ul className="links-list">
             {data.links.map((link) => {
               const Icon = iconMap[link.label]
@@ -160,35 +183,28 @@ export default function App() {
           </ul>
         </section>
 
-        {/* Experience / Skills tabs */}
-        <section className="section">
-          <div className="tabs" role="tablist" aria-label="Experience and skills">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                id={`tab-${t.id}`}
-                role="tab"
-                type="button"
-                className="tab section-heading"
-                aria-selected={tab === t.id}
-                aria-controls={`panel-${t.id}`}
-                tabIndex={tab === t.id ? 0 : -1}
-                onClick={() => setTab(t.id)}
-                onKeyDown={onTabKeyDown}
-              >
-                {t.label}
-              </button>
+        {/* Built by me */}
+        <section className="section section-compact" aria-labelledby="projects-heading">
+          <h2 className="section-heading" id="projects-heading">Built by me</h2>
+          <ul className="projects-grid">
+            {data.projects.map((p) => (
+              <li key={p.href}>
+                <a className="project-tile" href={p.href}>
+                  <span className="project-tile-head">
+                    <span className="project-tile-name">{p.name}</span>
+                    <ArrowUpRightIcon />
+                  </span>
+                  <span className="project-tile-url">{p.href.replace(/^https:\/\//, '')}</span>
+                  <span className="project-tile-desc">{p.description}</span>
+                </a>
+              </li>
             ))}
-          </div>
+          </ul>
+        </section>
 
-          {/* Both panels are always rendered (inactive one is `hidden`)
-              so the pre-rendered HTML still contains all content. */}
-          <div
-            id="panel-experience"
-            role="tabpanel"
-            aria-labelledby="tab-experience"
-            hidden={tab !== 'experience'}
-          >
+        {/* Experience */}
+        <section className="section" aria-labelledby="experience-heading">
+          <h2 className="section-heading section-heading-ruled" id="experience-heading">Experience</h2>
           <ol className="experience-list">
             {data.experience.map((job) => {
               const current = job.period.includes('Present')
@@ -217,7 +233,12 @@ export default function App() {
                 </ul>
                 {more.length > 0 && (
                   <details className="experience-more">
-                    <summary>{more.length} more</summary>
+                    <summary>
+                      <span className="experience-more-count">+{more.length}</span>
+                      <span>more achievements</span>
+                      <ChevronDownIcon />
+                      <span className="experience-more-rule" aria-hidden="true" />
+                    </summary>
                     <ul className="experience-highlights">
                       {more.map((h) => (
                         <li key={h}>{h}</li>
@@ -229,14 +250,11 @@ export default function App() {
               )
             })}
           </ol>
-          </div>
+        </section>
 
-          <div
-            id="panel-skills"
-            role="tabpanel"
-            aria-labelledby="tab-skills"
-            hidden={tab !== 'skills'}
-          >
+        {/* Skills */}
+        <section className="section" aria-labelledby="skills-heading">
+          <h2 className="section-heading section-heading-ruled" id="skills-heading">Skills</h2>
           <dl className="skills-list">
             {data.skills.map((group) => (
               <div key={group.group} className="skill-group">
@@ -249,13 +267,13 @@ export default function App() {
               </div>
             ))}
           </dl>
-          </div>
         </section>
 
         <footer className="footer">
-          <p>© {new Date().getFullYear()} ZayYarNaing</p>
+          <ViewCount />
+          <p>© {new Date().getFullYear()} {data.name}</p>
           <p>
-            <a href="https://github.com/ZayYarNaing98/zay007.dev.git" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
+            <a href="https://github.com/ZayYarNaing98/zay007.dev" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
             {' · '}Built with{' '}
             <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer">Claude Code</a>
           </p>

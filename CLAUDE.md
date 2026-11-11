@@ -37,6 +37,10 @@ The site is a client SPA, so `npm run build` runs an extra `scripts/postbuild.mj
 
 The canonical domain is hardcoded as `data.url` (`https://zayarnaing.com`) in `src/data.ts`; meta/OG/canonical tags in `index.html` use the same domain. Change both if the domain changes.
 
+### View counter
+
+The footer's view count comes from a separate Worker in `views-counter/` (scaffolded with `npm create cloudflare@latest views-counter`). It stores the count in one SQLite-backed Durable Object and has no public URL (`workers_dev: false`). The site Worker (`worker/index.ts`) reaches it through the `VIEWS` service binding and answers `GET /api/views` (read) and `POST /api/views` (increment). `src/ViewCount.tsx` POSTs once per browser session and GETs after that; it renders nothing if the counter is unreachable. The deploy workflow deploys `views-counter` before the site. To run both locally after `npm run build`: `npx wrangler dev -c dist/zay007_dev/wrangler.json -c views-counter/wrangler.jsonc`.
+
 ### Styling
 
 Two CSS files, no CSS framework:
