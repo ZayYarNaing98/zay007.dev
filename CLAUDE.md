@@ -48,6 +48,14 @@ Two CSS files, no CSS framework:
 - `src/index.css` — global reset, typography, CSS custom properties (`--bg`, `--fg`, `--muted`, `--accent`, `--border`, `--tag-bg`, `--tag-fg`, `--link`), and dark mode overrides via `@media (prefers-color-scheme: dark)`. Edit here to change the colour scheme.
 - `src/App.css` — all layout and component styles, scoped by class names. Edit here to change spacing, card styles, section headings, etc.
 
+### 3D layer
+
+No 3D library — everything is hand-rolled:
+
+- `src/Scene3D.tsx` — fixed full-viewport `<canvas>` behind the page: a rotating node network projected with simple perspective maths on a 2D context. Pointer tilts it, scroll pitches it; it pauses when the tab is hidden and draws one still frame under `prefers-reduced-motion`.
+- `data-tilt` — any element with this attribute leans towards the pointer. One delegated `pointermove` listener in `App.tsx` sets `--rx`/`--ry`/`--mx`/`--my`; the `[data-tilt]` rule in `App.css` applies the transform. Do not put `overflow: hidden` on a tilt element (it flattens the `translateZ` layers).
+- Scroll-in swing (`swing-in`) is a CSS scroll-driven animation behind `@supports`, so pre-rendered content is never hidden without JS.
+
 ### TypeScript config
 
 Strict mode is on: `noUnusedLocals`, `noUnusedParameters`, `noFallthroughCasesInSwitch`. Target is ES2023, bundler module resolution.
