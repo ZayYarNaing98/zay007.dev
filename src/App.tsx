@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './App.css'
+import Scene3D from './Scene3D'
 import TerminalBg from './TerminalBg'
 import ViewCount from './ViewCount'
 import { data } from './data'
@@ -7,6 +8,9 @@ import { data } from './data'
 // Highlights beyond this count are tucked into a <details> toggle.
 // They stay in the pre-rendered HTML, so crawlers still see them.
 const HIGHLIGHTS_SHOWN = 4
+
+// Largest angle (degrees) a [data-tilt] element leans towards the pointer.
+const TILT_MAX = 10
 
 const iconMap: Record<string, () => React.ReactElement> = {
   GitHub: GitHubIcon,
@@ -106,8 +110,54 @@ export default function App() {
     document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
   }, [dark])
 
+  // 3D tilt: any [data-tilt] element leans towards the pointer. One delegated
+  // listener writes CSS variables; App.css turns them into the transform.
+  // Skipped on touch devices and when the visitor prefers reduced motion.
+  useEffect(() => {
+    if (
+      !window.matchMedia('(hover: hover) and (pointer: fine)').matches ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
+      return
+    }
+
+    let active: HTMLElement | null = null
+
+    const reset = () => {
+      if (!active) return
+      for (const name of ['--rx', '--ry', '--mx', '--my']) {
+        active.style.removeProperty(name)
+      }
+      active = null
+    }
+
+    const onMove = (e: PointerEvent) => {
+      const el =
+        e.target instanceof Element ? e.target.closest<HTMLElement>('[data-tilt]') : null
+      if (el !== active) reset()
+      if (!el) return
+      active = el
+      const rect = el.getBoundingClientRect()
+      const px = (e.clientX - rect.left) / rect.width
+      const py = (e.clientY - rect.top) / rect.height
+      el.style.setProperty('--rx', `${((0.5 - py) * 2 * TILT_MAX).toFixed(2)}deg`)
+      el.style.setProperty('--ry', `${((px - 0.5) * 2 * TILT_MAX).toFixed(2)}deg`)
+      el.style.setProperty('--mx', `${(px * 100).toFixed(1)}%`)
+      el.style.setProperty('--my', `${(py * 100).toFixed(1)}%`)
+    }
+
+    document.addEventListener('pointermove', onMove, { passive: true })
+    document.documentElement.addEventListener('pointerleave', reset)
+    return () => {
+      document.removeEventListener('pointermove', onMove)
+      document.documentElement.removeEventListener('pointerleave', reset)
+      reset()
+    }
+  }, [])
+
   return (
     <>
+      <Scene3D dark={dark} />
       <TerminalBg />
       <button
         className="theme-toggle"
@@ -120,13 +170,15 @@ export default function App() {
         {/* About */}
         <section className="section" aria-labelledby="about-name">
           <div className="about-header">
-            <img
-              className="about-avatar"
-              src="/avatar.webp"
-              alt={`Photo of ${data.name}`}
-              width={112}
-              height={140}
-            />
+            <span className="avatar-3d" data-tilt>
+              <img
+                className="about-avatar"
+                src="/avatar.webp"
+                alt={`Photo of ${data.name}`}
+                width={112}
+                height={140}
+              />
+            </span>
             <div>
               <h1 className="about-name" id="about-name">{data.name}</h1>
               <p className="about-title">{data.title}</p>
@@ -189,7 +241,7 @@ export default function App() {
           <ul className="projects-grid">
             {data.projects.map((p) => (
               <li key={p.href}>
-                <a className="project-tile" href={p.href} target="_blank" rel="noopener noreferrer">
+                <a className="project-tile" data-tilt href={p.href} target="_blank" rel="noopener noreferrer">
                   <span className="project-tile-head">
                     <span className="project-tile-name">{p.name}</span>
                     <ArrowUpRightIcon />
