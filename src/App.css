@@ -859,7 +859,11 @@ html { overflow-x: clip; }
   --cyan: #22d3ee;
 }
 
-[data-theme="light"] .portfolio { --cyan: var(--accent); }
+[data-theme="light"] .portfolio {
+  --panel: #ffffff;
+  --edge: #a78bca;
+  --cyan: #096579;
+}
 
 .hero-section {
   display: grid;
@@ -1035,6 +1039,69 @@ html { overflow-x: clip; }
 .mini-cards > span { position: absolute; top: 8px; left: 20px; display: grid; place-items: center; width: 56px; height: 78px; font-size: 22px; font-weight: 800; border-radius: 7px; border: 2px solid #f0e8ff; background: #8545be; color: #fff; box-shadow: 2px 4px 0 #3a1456; transform: rotate(-24deg) translateX(-20px); }
 .mini-cards > span:nth-child(2) { background: #075e70; transform: translateZ(10px); box-shadow: 2px 4px 0 #033a45; }
 .mini-cards > span:nth-child(3) { background: #b63878; transform: translateZ(20px) rotate(24deg) translateX(20px); box-shadow: 2px 4px 0 #60183e; }
+
+/* Keep decorative background text separate from readable page content. */
+[data-theme="light"] .terminal-bg { opacity: 0.22; }
+[data-theme="light"] .scene-3d { opacity: 0.55; }
+
+/* Light surfaces need solid faces and crisp edges rather than neon glow. */
+[data-theme="light"] .about-name {
+  text-shadow: 0 2px 0 var(--border);
+}
+
+[data-theme="light"] .floating-panel {
+  background: var(--panel);
+  box-shadow: 4px 6px 0 #ddd0e8, 0 18px 32px -20px #3d206066;
+}
+
+[data-theme="light"] .panel-chrome {
+  background: var(--tag-bg);
+  border-radius: 9px 9px 0 0;
+}
+
+[data-theme="light"] .code-purple { color: #5b21b6; }
+[data-theme="light"] .panel-chrome > span,
+[data-theme="light"] .panel-deploy small,
+[data-theme="light"] .sculpture-coordinate { color: #574366; }
+
+[data-theme="light"] .cube-face {
+  background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+  border-color: #5b21b6;
+  box-shadow: inset 0 0 18px #ffffff20;
+}
+
+[data-theme="light"] .cube-left,
+[data-theme="light"] .cube-right { background: #5b21b6; }
+[data-theme="light"] .cube-top { background: #c4a6f5; }
+[data-theme="light"] .cube-mark { color: #fff; text-shadow: none; }
+[data-theme="light"] .cube-top .cube-mark { color: #3d2060; }
+[data-theme="light"] .cube-corner { border-color: #e9d5ff; }
+[data-theme="light"] .orbit-two { border-color: #5793a0; }
+
+[data-theme="light"] .project-tile {
+  background: var(--panel);
+  border-color: #b6a1cc;
+  box-shadow: 0 5px 0 #ddd0e8, 0 16px 28px -22px #3d206066;
+}
+
+[data-theme="light"] .project-art {
+  background: #ede5f5;
+  border-color: #c2aed8;
+}
+
+/* Keep light-theme sections readable throughout their scroll entrance. */
+@keyframes swing-in-light {
+  from { transform: perspective(900px) rotateX(-14deg) translateY(32px) scale(0.97); }
+  to { transform: perspective(900px) rotateX(0deg) translateY(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    [data-theme="light"] .section:not(.hero-section) {
+      animation-name: swing-in-light;
+    }
+  }
+}
 
 @media (max-width: 850px) {
   .portfolio { max-width: 720px; padding: 56px 24px 80px; }
