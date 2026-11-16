@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Scene3D from './Scene3D'
+import HeroSculpture from './HeroSculpture'
 import TerminalBg from './TerminalBg'
 import ViewCount from './ViewCount'
 import { data } from './data'
@@ -168,33 +169,36 @@ export default function App() {
       </button>
       <main className="portfolio">
         {/* About */}
-        <section className="section" aria-labelledby="about-name">
-          <div className="about-header">
-            <span className="avatar-3d" data-tilt>
-              <img
-                className="about-avatar"
-                src="/avatar.webp"
-                alt={`Photo of ${data.name}`}
-                width={112}
-                height={140}
-              />
-            </span>
-            <div>
-              <h1 className="about-name" id="about-name">{data.name}</h1>
-              <p className="about-title">{data.title}</p>
+        <section className="section hero-section" aria-labelledby="about-name">
+          <div className="hero-copy">
+            <div className="about-header">
+              <span className="avatar-3d" data-tilt>
+                <img
+                  className="about-avatar"
+                  src="/avatar.webp"
+                  alt={`Photo of ${data.name}`}
+                  width={112}
+                  height={140}
+                />
+              </span>
+              <div>
+                <h1 className="about-name" id="about-name">{data.name}</h1>
+                <p className="about-title">{data.title}</p>
+              </div>
+            </div>
+            <p className="about-bio">{data.bio}</p>
+            <div className="cta-row">
+              <a className="btn btn-primary" href={data.cv} download="ZayYarNaing-CV.pdf">
+                <DownloadIcon />
+                Download CV (PDF)
+              </a>
+              <a className="btn btn-outline" href={`mailto:${data.email}`}>
+                <EmailIcon />
+                Email me
+              </a>
             </div>
           </div>
-          <p className="about-bio">{data.bio}</p>
-          <div className="cta-row">
-            <a className="btn btn-primary" href={data.cv} download="ZayYarNaing-CV.pdf">
-              <DownloadIcon />
-              Download CV (PDF)
-            </a>
-            <a className="btn btn-outline" href={`mailto:${data.email}`}>
-              <EmailIcon />
-              Email me
-            </a>
-          </div>
+          <HeroSculpture />
         </section>
 
         {/* Quick facts */}
@@ -239,9 +243,20 @@ export default function App() {
         <section className="section section-compact" aria-labelledby="projects-heading">
           <h2 className="section-heading" id="projects-heading">Built by me</h2>
           <ul className="projects-grid">
-            {data.projects.map((p) => (
+            {data.projects.map((p, index) => (
               <li key={p.href}>
                 <a className="project-tile" data-tilt href={p.href} target="_blank" rel="noopener noreferrer">
+                  <span className={`project-art project-art-${index}`} aria-hidden="true">
+                    <span className="project-art-grid" />
+                    {index === 0 ? (
+                      <span className="mini-stack"><span /><span /><span>{'</>'}</span></span>
+                    ) : index === 1 ? (
+                      <span className="mini-terminal"><span>● ● ●</span><strong>:wq<span className="mini-cursor">▌</span></strong><small>vim / type / repeat</small></span>
+                    ) : (
+                      <span className="mini-cards"><span>+4</span><span>↻</span><span>+10</span></span>
+                    )}
+                    <span className="project-art-number">0{index + 1}</span>
+                  </span>
                   <span className="project-tile-head">
                     <span className="project-tile-name">{p.name}</span>
                     <ArrowUpRightIcon />

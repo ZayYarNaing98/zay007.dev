@@ -12,7 +12,8 @@ const app = (
 
 // Production builds are pre-rendered (scripts/postbuild.mjs), so the root
 // already contains markup we hydrate. In dev the root is empty, so we mount.
-if (root.hasChildNodes()) {
+// The development placeholder comment is a child node, but is not SSR markup.
+if (root.childElementCount > 0) {
   hydrateRoot(root, app)
 } else {
   createRoot(root).render(app)
