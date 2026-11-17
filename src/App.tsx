@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import './App.css'
 import Scene3D from './Scene3D'
 import HeroSculpture from './HeroSculpture'
 import TerminalBg from './TerminalBg'
 import ViewCount from './ViewCount'
 import { data } from './data'
+import { useDarkTheme } from './theme'
 
 // Highlights beyond this count are tucked into a <details> toggle.
 // They stay in the pre-rendered HTML, so crawlers still see them.
@@ -105,11 +106,7 @@ function MoonIcon() {
 }
 
 export default function App() {
-  const [dark, setDark] = useState(true)
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light')
-  }, [dark])
+  const [dark, toggleTheme] = useDarkTheme()
 
   // 3D tilt: any [data-tilt] element leans towards the pointer. One delegated
   // listener writes CSS variables; App.css turns them into the transform.
@@ -162,7 +159,7 @@ export default function App() {
       <TerminalBg />
       <button
         className="theme-toggle"
-        onClick={() => setDark(d => !d)}
+        onClick={toggleTheme}
         aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
       >
         {dark ? <SunIcon /> : <MoonIcon />}

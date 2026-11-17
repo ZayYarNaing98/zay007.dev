@@ -57,7 +57,6 @@
 }
 
 .terminal-line {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, monospace;
   font-size: 13px;
   line-height: 1.5;
   white-space: nowrap;
@@ -994,7 +993,7 @@ html { overflow-x: clip; }
 .panel-chrome { display: flex; align-items: center; gap: 4px; padding: 10px 12px; border-bottom: 1px solid var(--border); }
 .panel-chrome i { width: 4px; height: 4px; border-radius: 50%; background: var(--accent); opacity: 0.6; }
 .panel-chrome > span { margin-left: auto; font-size: 8px; color: var(--muted); }
-.panel-code code { display: block; padding: 12px; font-size: 10px; line-height: 1.9; color: var(--fg); }
+.panel-code code { display: block; font-family: inherit; padding: 12px; font-size: 10px; line-height: 1.9; color: var(--fg); }
 .code-purple { color: var(--accent); }
 .code-cyan { color: var(--cyan); }
 .panel-deploy { bottom: 57px; left: 8px; display: flex; align-items: center; gap: 10px; padding: 12px 18px; transform: translateZ(65px) rotateY(12deg) rotateZ(-7deg); }
@@ -1124,7 +1123,11 @@ html { overflow-x: clip; }
   .about-bio { font-size: 12px; }
   .btn { font-size: 11px; padding: 0 13px; }
   .sculpture-stage { height: 340px; }
-  .panel-code { right: 4px; top: 22px; width: 185px; }
+  /* Narrow stage: shrink the cube and slide it down-left, and tuck the code
+     panel into the top-right corner, so the two no longer overlap. */
+  .sculpture-float { top: 55%; left: 42%; scale: 0.8; }
+  .orbit { top: calc(55% - 132px); left: calc(42% - 132px); }
+  .panel-code { right: 0; top: 6px; width: 172px; }
   .panel-code code { font-size: 8px; }
   .panel-deploy { left: 10px; bottom: 38px; }
   .projects-grid { grid-template-columns: 1fr; gap: 20px; }
