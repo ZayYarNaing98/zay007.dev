@@ -23,6 +23,14 @@
 
     <meta name="theme-color" content="#0d1117" />
 
+    <!-- Pick the theme before first paint: saved choice, else system setting, else dark. -->
+    <script>
+      var t
+      try { t = localStorage.getItem('theme') } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'
+      document.documentElement.setAttribute('data-theme', t)
+    </script>
+
     <!-- Agent-readable resources -->
     <link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt" />
 

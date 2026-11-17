@@ -3,7 +3,7 @@
   <text
     x="16"
     y="23"
-    font-family="ui-monospace, Consolas, monospace"
+    font-family="system-ui, -apple-system, 'Segoe UI', Arial, sans-serif"
     font-size="20"
     font-weight="700"
     fill="#c084fc"
